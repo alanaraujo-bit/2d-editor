@@ -1,0 +1,22 @@
+<Application x:Class="DoisD.Updater.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <!-- Paleta clara (padrão). O tema escuro substitui estes valores em App.ApplyTheme(). -->
+        <SolidColorBrush x:Key="Surface" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="Ink" Color="#111418"/>
+        <SolidColorBrush x:Key="Body" Color="#3A4048"/>
+        <SolidColorBrush x:Key="Muted" Color="#6B7280"/>
+        <SolidColorBrush x:Key="Line" Color="#E4E7EB"/>
+        <SolidColorBrush x:Key="Track" Color="#ECEFF2"/>
+        <SolidColorBrush x:Key="Hover" Color="#F1F3F5"/>
+        <SolidColorBrush x:Key="Accent" Color="#005AAB"/>
+        <SolidColorBrush x:Key="AccentHover" Color="#004C91"/>
+        <SolidColorBrush x:Key="OnAccent" Color="#FFFFFF"/>
+        <sys:Double x:Key="ShadowOpacity">0.16</sys:Double>
+        <FontFamily x:Key="UiFont">Segoe UI Variable Text, Segoe UI</FontFamily>
+        <FontFamily x:Key="TitleFont">Segoe UI Variable Display, Segoe UI</FontFamily>
+    </Application.Resources>
+</Application>

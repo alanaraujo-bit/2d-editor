@@ -1,0 +1,35 @@
+name: Relatar um problema
+description: Algo não funciona como deveria no 2D Editor
+labels: ["problema"]
+body:
+  - type: markdown
+    attributes:
+      value: Obrigado por ajudar a melhorar o 2D Editor. Quanto mais detalhes, mais rápido conseguimos resolver.
+  - type: textarea
+    id: oque
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o problema e o que você esperava que acontecesse.
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      placeholder: |
+        1. Abra um arquivo...
+        2. Clique em...
+        3. Veja o erro
+  - type: input
+    id: versao
+    attributes:
+      label: Versão do 2D Editor
+      description: Em ? → Sobre o 2D Editor
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: windows
+    attributes:
+      label: Windows
+      options: ["Windows 11", "Windows 10"]

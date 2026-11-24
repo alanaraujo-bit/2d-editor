@@ -1,0 +1,10 @@
+{
+  "headline": "Bem-vindo ao 2D Editor, o editor de texto e código da 2D Tecnologia.",
+  "notes": [
+    { "type": "novo", "text": "Editor de texto e código completo: realce de sintaxe para dezenas de linguagens, abas, macros e busca com expressões regulares." },
+    { "type": "novo", "text": "Visual da 2D Tecnologia, com modo claro e modo escuro no azul-marinho da marca." },
+    { "type": "novo", "text": "Atualização automática: quando sair uma versão nova, o 2D Editor avisa, mostra as novidades e se atualiza sozinho." },
+    { "type": "novo", "text": "Suporte direto pelo menu ? → Suporte 2D Tecnologia (WhatsApp)." },
+    { "type": "melhoria", "text": "Interface toda em português do Brasil." }
+  ]
+}

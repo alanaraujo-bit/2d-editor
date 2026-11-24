@@ -1,0 +1,135 @@
+﻿<Window x:Class="DoisD.Updater.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Atualização do 2D Editor" Width="392" SizeToContent="Height" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" Topmost="True" ShowInTaskbar="True"
+        FontFamily="{StaticResource UiFont}" TextOptions.TextFormattingMode="Ideal"
+        UseLayoutRounding="True" SnapsToDevicePixels="True" Icon="Assets/2d-256.png">
+
+    <Window.Resources>
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource OnAccent}"/>
+            <Setter Property="Background" Value="{StaticResource Accent}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="16,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" CornerRadius="7" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="QuietButton" TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource Body}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="12,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" CornerRadius="7" Padding="{TemplateBinding Padding}" Background="Transparent">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource Hover}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CloseButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Width="26" Height="26" CornerRadius="6" Background="Transparent">
+                            <Path Data="M0,0 L8,8 M8,0 L0,8" Stroke="{StaticResource Muted}" StrokeThickness="1.2"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource Hover}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="Root" Margin="16,12,16,20" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform><ScaleTransform x:Name="RootScale" ScaleX="1" ScaleY="1"/></Grid.RenderTransform>
+        <Border CornerRadius="12" Background="{StaticResource Surface}" BorderBrush="{StaticResource Line}" BorderThickness="1"
+                MouseLeftButtonDown="Card_MouseLeftButtonDown">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="24" ShadowDepth="6" Direction="270" Color="#000000"
+                                  Opacity="{StaticResource ShadowOpacity}"/>
+            </Border.Effect>
+
+            <StackPanel Margin="20,16,14,18">
+                <!-- Linha da marca -->
+                <Grid Margin="0,0,0,12">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Assets/2d-256.png" Width="18" Height="18" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <TextBlock Text="2D Editor" Foreground="{StaticResource Muted}" FontSize="12" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Click="Later_Click" ToolTip="Fechar"/>
+                </Grid>
+
+                <StackPanel x:Name="Body" Margin="0,0,6,0">
+                    <StackPanel.RenderTransform><TranslateTransform x:Name="ContentShift"/></StackPanel.RenderTransform>
+
+                    <TextBlock x:Name="TitleText" Text="Nova versão disponível" Foreground="{StaticResource Ink}"
+                               FontFamily="{StaticResource TitleFont}" FontSize="17" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="SubtitleText" Text="" Foreground="{StaticResource Muted}" FontSize="13"
+                               TextWrapping="Wrap" LineHeight="19" Margin="0,4,0,0"/>
+
+                    <!-- Lista de mudanças -->
+                    <ScrollViewer x:Name="NotesScroll" MaxHeight="232" Margin="0,16,0,0" VerticalScrollBarVisibility="Auto"
+                                  Visibility="Collapsed">
+                        <StackPanel x:Name="NotesPanel"/>
+                    </ScrollViewer>
+
+                    <!-- Progresso -->
+                    <StackPanel x:Name="ProgressPanel" Margin="0,18,0,0" Visibility="Collapsed">
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock x:Name="StatusText" Text="" Foreground="{StaticResource Body}" FontSize="12.5"/>
+                            <TextBlock x:Name="PercentText" Text="0%" Foreground="{StaticResource Muted}" FontSize="12.5"
+                                       HorizontalAlignment="Right" Typography.NumeralAlignment="Tabular"/>
+                        </Grid>
+                        <Border x:Name="Track" Height="4" CornerRadius="2" Background="{StaticResource Track}">
+                            <Border x:Name="Bar" Width="0" CornerRadius="2" Background="{StaticResource Accent}" HorizontalAlignment="Left"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Rodapé -->
+                    <Grid x:Name="Footer" Margin="0,20,0,0">
+                        <TextBlock x:Name="MetaText" Text="" Foreground="{StaticResource Muted}" FontSize="12" VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="SecondaryButton" Content="Agora não" Style="{StaticResource QuietButton}" Margin="0,0,6,0" Click="Secondary_Click"/>
+                            <Button x:Name="PrimaryButton" Content="Atualizar" Style="{StaticResource PrimaryButton}" Click="Primary_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
