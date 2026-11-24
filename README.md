@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/alanaraujo-bit/2d-editor/releases/latest/download/2D-Editor-Setup.exe"><img src="https://img.shields.io/badge/Baixar%20para%20Windows-005AAB?style=for-the-badge&logo=windows11&logoColor=white" alt="Baixar para Windows" height="44"></a>
+  <a href="https://github.com/alanaraujo-bit/2d-editor/releases/latest/download/2D-Editor-Setup.exe"><img src="2d/brand/botao-download.png" alt="Baixar para Windows" width="273"></a>
 </p>
 
 <p align="center">
